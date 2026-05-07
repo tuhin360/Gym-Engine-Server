@@ -4,16 +4,20 @@ const getClassCollection = () => getDB().collection('classes');
 
 const ClassModel = {
   async getAll() {
-    return await getClassCollection().find().toArray();
+    return await getClassCollection().find({}).toArray();
   },
 
-  async getById(id) {
-    const { ObjectId } = require('mongodb');
-    return await getClassCollection().findOne({ _id: new ObjectId(id) });
+  async getFeatured() {
+    return await getClassCollection().find({ featured: true }).toArray();
   },
 
   async create(classData) {
-    return await getClassCollection().insertOne(classData);
+    const result = await getClassCollection().insertOne(classData);
+    return { ...classData, _id: result.insertedId };
+  },
+
+  async clear() {
+    return await getClassCollection().deleteMany({});
   }
 };
 
