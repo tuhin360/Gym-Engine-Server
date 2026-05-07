@@ -16,7 +16,7 @@ export const userController = {
 
   async updateUserRole(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const id = req.params.id as string;
       const { role } = req.body;
 
       if (!['admin', 'trainer', 'member', 'non-member'].includes(role)) {
