@@ -36,6 +36,7 @@ async function startServer() {
     // Routes
     app.use('/api/v1/classes', require('./src/routes/classRoutes'));
     app.use('/api/v1/auth', require('./src/routes/authRoutes'));
+    app.use('/api/v1/schedules', require('./src/routes/scheduleRoutes'));
 
     // Error Handler
     app.use((err, req, res, next) => {
