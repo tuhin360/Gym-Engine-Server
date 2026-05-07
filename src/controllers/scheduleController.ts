@@ -25,8 +25,12 @@ export const scheduleController = {
 
   async updateSchedule(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const updated = await ScheduleModel.update(id as string, req.body);
+      const id = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+
+      const updated = await ScheduleModel.update(id, req.body);
+
       if (updated) {
         res.status(200).json({ success: true, message: 'Schedule updated successfully' });
       } else {
@@ -39,8 +43,12 @@ export const scheduleController = {
 
   async deleteSchedule(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const id = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+
       const deleted = await ScheduleModel.deleteOne(id);
+
       if (deleted) {
         res.status(200).json({ success: true, message: 'Schedule deleted successfully' });
       } else {
