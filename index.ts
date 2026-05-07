@@ -10,6 +10,7 @@ import classRoutes from './src/routes/classRoutes';
 import authRoutes from './src/routes/authRoutes';
 import scheduleRoutes from './src/routes/scheduleRoutes';
 import userRoutes from './src/routes/userRoutes';
+import analyticsRoutes from './src/routes/analyticsRoutes';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ const port = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: ['https://gym-engine-server.vercel.app', 'http://127.0.0.1:3000'],
   credentials: true
 }));
 app.use(express.json());
@@ -35,7 +36,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 async function startServer() {
   try {
     await connectDB();
-    
+
     // Basic Route
     app.get('/', (req: Request, res: Response) => {
       res.send('GymEngine Server is running');
@@ -46,6 +47,7 @@ async function startServer() {
     app.use('/api/v1/auth', authRoutes);
     app.use('/api/v1/schedules', scheduleRoutes);
     app.use('/api/v1/users', userRoutes);
+    app.use('/api/v1/analytics', analyticsRoutes);
 
     // Error Handler
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
