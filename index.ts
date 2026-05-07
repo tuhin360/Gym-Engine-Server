@@ -19,7 +19,11 @@ const port = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({
-  origin: ['https://gym-engine-server.vercel.app', 'http://127.0.0.1:3000'],
+  origin: [
+    'https://gym-engine-client.vercel.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+  ],
   credentials: true
 }));
 app.use(express.json());
