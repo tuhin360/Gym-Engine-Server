@@ -26,7 +26,7 @@ export const scheduleController = {
   async updateSchedule(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const updated = await ScheduleModel.update(id, req.body);
+      const updated = await ScheduleModel.update(id as string, req.body);
       if (updated) {
         res.status(200).json({ success: true, message: 'Schedule updated successfully' });
       } else {

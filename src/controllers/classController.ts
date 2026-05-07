@@ -38,7 +38,7 @@ export const classController = {
   async updateClass(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const updated = await ClassModel.update(id, req.body);
+      const updated = await ClassModel.update(id as string, req.body);
       if (updated) {
         res.status(200).json({ success: true, message: 'Class updated successfully' });
       } else {
@@ -52,7 +52,7 @@ export const classController = {
   async deleteClass(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const deleted = await ClassModel.deleteOne(id);
+      const deleted = await ClassModel.deleteOne(id as string);
       if (deleted) {
         res.status(200).json({ success: true, message: 'Class deleted successfully' });
       } else {
